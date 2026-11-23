@@ -1,0 +1,13 @@
+site_id,site_name,category,latitude,longitude,elevation_m,slope_degrees,aspect_degrees,slope_category,land_cover_category,roughness_class,roughness_length_z0_m,osm_village,osm_county,osm_district
+AERO_01,VIT Bhopal Campus (Open Ridge),Educational/Open Ridge,23.0775,76.8491,493.0,0.73,281.31,Flat Plain (<2°),Open Campus / Elevated Ridge,Class 3 - Open Flat / Low Obstacles,0.03,Lasudiya Khas,Ashta Tahsil,Sehore
+AERO_02,Kothrikalan Rural Center,Village Settlement,23.0712,76.842,486.0,0.65,276.34,Flat Plain (<2°),Village Residential / Built-up,Class 6 - Village / Rural Settlement,0.45,Kothri Kalan,Ashta Tahsil,Sehore
+AERO_03,Kothri Farmland North (Parbati Basin),Agricultural Flatland,23.088,76.852,492.0,0.51,8.13,Flat Plain (<2°),Cultivated Crops / Flatland,Class 3 - Open Agricultural Plain,0.05,Kothri Kalan,Ashta Tahsil,Sehore
+AERO_04,Metwada Rural Outskirts,Rural Community,23.0645,76.8925,496.0,0.81,135.0,Flat Plain (<2°),Rural Hamlet / Mixed Farmstead,Class 6 - Rural Hamlet / Low Buildings,0.4,Chhapritalluk,Ichhawar Tahsil,Sehore
+AERO_05,Pagaria Hat Agricultural Zone,Agricultural Belt,23.112,76.825,481.0,0.1,135.0,Flat Plain (<2°),Intensive Farmland / Field Boundaries,Class 3 - Cultivated Farmland,0.075,Mana Khedi,Ashta Tahsil,Sehore
+AERO_06,Lasudiya Khas (Midway Ashta-Kothri),Farmland Plateau,23.045,76.782,495.0,0.32,153.43,Flat Plain (<2°),Elevated Farmland / Open Tableland,Class 3 - Open Farmland Plateau,0.06,Sando Khedi,Ashta Tahsil,Sehore
+AERO_07,Ashta Rural East (Farmland Boundary),Suburban/Rural Border,23.021,76.732,492.0,0.52,146.31,Flat Plain (<2°),Town Fringe / Semi-Settlement,Class 5 - Suburban Transition,0.35,Ashta,Ashta Tahsil,Sehore
+AERO_08,Ashta South Agricultural Plain,Agricultural Flatland,22.985,76.711,502.0,0.41,135.0,Flat Plain (<2°),Cultivated Crops / Flatland,Class 3 - Open Agricultural Plain,0.05,Khempur,Ashta Tahsil,Sehore
+AERO_09,Barkheda Hasan Rural Sector,Rural Settlement,23.105,76.885,497.0,0.55,66.8,Flat Plain (<2°),Village Habitation / Outskirts,Class 6 - Rural Settlement,0.42,Kothri Kalan,Ashta Tahsil,Sehore
+AERO_10,Ichhawar Rural Plateau (High Elevation),Hilly Rural Area,23.024,77.015,510.0,0.52,213.69,Flat Plain (<2°),High-Elevation Plateau / Scrub Ridge,Class 5 - Rolling Highland / Shrub,0.2,Ichhawar,Ichhawar Tahsil,Sehore
+AERO_11,Sehore Rural South-West Outskirts,Agricultural Cluster,23.165,77.012,497.0,0.51,81.87,Flat Plain (<2°),Cultivated Fields / Scattered Farmsteads,Class 4 - Agricultural Cluster,0.1,Gudbhela,Sehore Tahsil,Sehore
+AERO_12,Shyampur Rural Outskirts,Village Cluster,23.245,77.085,497.0,0.74,119.05,Flat Plain (<2°),Dense Village Nucleus,Class 6 - Village Cluster,0.48,Semali Khurd,Sehore Tahsil,Sehore
