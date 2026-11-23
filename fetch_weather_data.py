@@ -95,15 +95,23 @@ CANDIDATE_SITES: List[Dict] = [
 ]
 
 
-# 2. ANALYSIS PARAMETERS & TURBINE SPECIFICATIONS
+# 2. ANALYSIS PARAMETERS & 500W HELICAL VAWT SPECIFICATIONS (FROM CAD MODEL)
 # Historical date range (2 full calendar years for seasonal fidelity)
 START_DATE = "2023-01-01"
 END_DATE = "2024-12-31"
 
-# Micro-wind turbine specifications (Standard 1kW - 5kW mast turbine)
-CUT_IN_SPEED_MS = 3.0    # Minimum wind speed required to start blade rotation (m/s)
-CUT_OUT_SPEED_MS = 25.0  # Maximum safe operating speed before braking/furling (m/s)
-R_SPECIFIC_AIR = 287.05  # Specific gas constant for dry air in J / (kg * K)
+# 500W Class Helical Vertical Axis Wind Turbine (VAWT) CAD Specs:
+# - Rotor Height (H) = 1.2 m
+# - Rotor Diameter (D) = 0.8 m
+# - Swept Area (A = D * H) = 0.96 m^2 (Rectangular projection for VAWT)
+ROTOR_HEIGHT_M = 1.2
+ROTOR_DIAMETER_M = 0.8
+SWEPT_AREA_M2 = 0.96
+RATED_POWER_W = 500.0
+SYSTEM_EFFICIENCY = 0.14  # Realistic eta_sys for helical VAWT (12% - 16%)
+CUT_IN_SPEED_MS = 2.0     # Low cut-in threshold from helical omnidirectional design
+CUT_OUT_SPEED_MS = 25.0   # Maximum safe operating speed (m/s)
+R_SPECIFIC_AIR = 287.05   # Specific gas constant for dry air in J / (kg * K)
 
 # Output directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -227,13 +235,23 @@ def process_site(site_meta: Dict, start_date: str, end_date: str) -> Tuple[Dict,
         (raw_df["wind_speed_10m"] <= CUT_OUT_SPEED_MS)
     )
 
-    # 5. Aggregate metrics per coordinate
+    # 5. 500W Helical VAWT Electrical Power (Watts):
+    # P = WPD * Swept_Area (0.96 m^2) * System_Efficiency (14%)
+    raw_df["power_generated_w"] = np.where(
+        raw_df["is_operable"],
+        np.minimum(raw_df["wpd_w_m2"] * SWEPT_AREA_M2 * SYSTEM_EFFICIENCY, RATED_POWER_W),
+        0.0
+    )
+
+    # 6. Aggregate metrics per coordinate
     avg_speed = float(raw_df["wind_speed_10m"].mean())
     max_speed = float(raw_df["wind_speed_10m"].max())
     p90_speed = float(raw_df["wind_speed_10m"].quantile(0.90))
     avg_gust = float(raw_df["wind_gusts_10m"].mean())
     avg_wpd = float(raw_df["wpd_w_m2"].mean())
     operable_pct = float((raw_df["is_operable"].sum() / len(raw_df)) * 100.0)
+    avg_power_w = float(raw_df["power_generated_w"].mean())
+    annual_kwh = round((avg_power_w * 8760.0) / 1000.0, 1)
     avg_temp = float(raw_df["temperature_2m"].mean())
     avg_density = float(raw_df["air_density_kg_m3"].mean())
     prevailing_dir = vector_mean_wind_direction(raw_df["wind_direction_10m"])
@@ -251,6 +269,8 @@ def process_site(site_meta: Dict, start_date: str, end_date: str) -> Tuple[Dict,
         "avg_gust_speed_10m": round(avg_gust, 2),
         "avg_wpd_w_m2": round(avg_wpd, 2),
         "operable_hours_pct": round(operable_pct, 2),
+        "avg_power_w_500w_vawt": round(avg_power_w, 2),
+        "est_annual_kwh_500w_vawt": annual_kwh,
         "avg_temp_c": round(avg_temp, 2),
         "avg_air_density_kg_m3": round(avg_density, 3),
         "prevailing_wind_dir_deg": prevailing_dir,
